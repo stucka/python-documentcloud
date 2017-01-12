@@ -120,3 +120,23 @@ How to read a PDF document from a URL on the World Wide Web and upload it to Doc
     >>> # Upload that to DocumentCloud
     >>> client = DocumentCloud(DOCUMENTCLOUD_USERNAME, DOCUMENTCLOUD_PASSWORD)
     >>> obj = client.documents.upload(file_obj)
+    
+    
+Getting statistics from projects
+--------------------------------
+
+    >>>from documentcloud import DocumentCloud
+    >>>import creds
+    >>>username = "someone@somewhere.com"
+    >>>password = "somethingsneaky"
+    >>>projectsought = "Cool set of documents"
+    >>>client = DocumentCloud(username, password)
+    >>>project = client.projects.get(title=projectsought)
+    >>>pagecount = 0
+    >>>for document in project.document_ids:
+    >>>    docobj = project.get_document(document)
+    >>>    pagecount += docobj.pages
+   
+    >>>print(str(pagecount) +  " pages from " + str(len(project.document_ids)) + " documents found in " + projectsought)  
+    >>># 5433 pages from 643 documents found in Cool set of documents
+    
